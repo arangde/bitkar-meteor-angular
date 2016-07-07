@@ -10,6 +10,7 @@ import { name as ProductsList } from '../productsList/productsList';
 import { name as ProductDetails } from '../productDetails/productDetails';
 import { name as Navigation } from '../navigation/navigation';
 import { name as FooterNav } from '../footerNav/footerNav';
+import { name as Pages } from '../pages/pages';
 
 class Socially {}
 
@@ -21,6 +22,7 @@ export default angular.module(name, [
     uiRouter,
     ProductsList,
     ProductDetails,
+    Pages,
     Navigation,
     FooterNav
 ]).component(name, {
@@ -35,11 +37,9 @@ function config($locationProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);
 
     $urlRouterProvider
-    // .when("/", { templateUrl: "partials/home.html", controller: "HomeCtrl" })
-    // .when("/about", { templateUrl: "partials/about.html", controller: "PageCtrl" })
-    // .when("/faq", {templateUrl: "partials/faq.html", controller: "PageCtrl"})
-    // .when("/contact", {templateUrl: "partials/contact.html", controller: "PageCtrl"})
-    // .when("/blog", {templateUrl: "partials/blog.html", controller: "PageCtrl"})
-    .otherwise("/shop", {templateUrl: "partials/404.html", controller: "PageCtrl"});
+        // .when("/services", {templateUrl: "pages/services.html", controller: "PageCtrl"})
+        // .when("/contact", {templateUrl: "pages/contact.html", controller: "PageCtrl"})
+        .otherwise("/");
+        // .otherwise("/404", {templateUrl: "pages/404.html", controller: "PageCtrl"});
 };
 

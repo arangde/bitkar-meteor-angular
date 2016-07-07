@@ -2,10 +2,7 @@
  * Created by jaran on 7/6/2016.
  */
 import angular from 'angular';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap/dist/js/bootstrap.min.js';
 import angularMeteor from 'angular-meteor';
-
 import { name as Socially } from '../imports/ui/components/socially/socially';
 
 //

@@ -15,7 +15,7 @@ class ProductsList {
 
         $reactive(this).attach($scope);
 
-        this.perPage = 2;
+        this.perPage = 9;
         this.page = 1;
         this.sort = {
             name: 1
@@ -25,7 +25,6 @@ class ProductsList {
         this.filteredItems = [];
         this.groupedItems = [];
         this.pagedItems = [];
-
 
         this.subscribe('products', () => [{
             limit: parseInt(this.perPage),
@@ -52,33 +51,7 @@ class ProductsList {
         this.page = newPage;
     }
 
-    // searchMatch(haystack, needle) {
-    //     if (!needle) {
-    //         return true;
-    //     }
-    //     return haystack.toLowerCase().indexOf(needle.toLowerCase()) !== -1;
-    // }
-    //
-    // search(name, $filter) {
-    //     this.filteredItems = $filter('filter')(Products, function (product) {
-    //         for (var attr in product) {
-    //             if (searchMatch(product[name], this.getReactively('searchText')))
-    //                 return true;
-    //         }
-    //         return false;
-    //     });
-    //     this.page = 1;
-    //     this.groupToPages();
-    // }
-
     myFilter(column, category) {
-        // this.filteredItems = $filter('filter')(Products, function (product) {
-        //     for (var attr in product) {
-        //         if (searchMatch(product[column], category))
-        //             return true;
-        //     }
-        //     return false;
-        // });
 
         const options = {
             limit: parseInt(this.perPage)
@@ -90,17 +63,6 @@ class ProductsList {
         ]);
     }
 
-    // groupToPages() {
-    //     this.pagedItems = [];
-    //
-    //     for (var i = 0; i < this.filteredItems.length; i++) {
-    //         if (i % this.perPage === 0) {
-    //             this.pagedItems[Math.floor(i / this.perPage)] = [this.filteredItems[i]];
-    //         } else {
-    //             this.pagedItems[Math.floor(i / this.perPage)].push(this.filteredItems[i]);
-    //         }
-    //     }
-    // }
 }
 
 const name = 'productsList';
@@ -120,7 +82,7 @@ function config($stateProvider) {
     'ngInject';
     $stateProvider
         .state('products', {
-            url: '/shop',
+            url: '/',
             template: '<products-list></products-list>'
         });
 }
