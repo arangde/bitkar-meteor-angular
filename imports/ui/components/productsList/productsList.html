@@ -53,16 +53,16 @@
                 <!--Filter Animation Product-->
                 <div class="group filter-button-top">
                     <ul class="filter group albumFilter">
-                        <li ng-click="myFilter('category',null)" class="active">ALL</li>
-                        <li ng-click="myFilter('category','speakers')" >SPEAKERS</li>
-                        <li ng-click="myFilter('category','watches')" >WATCHES</li>
-                        <li ng-click="myFilter('category','station')" >STATION</li>
-                        <li ng-click="myFilter('category','phone')" >PHONE</li>
+                        <li ng-click="productsList.filterCategory('')" class="active">ALL</li>
+                        <li ng-click="productsList.filterCategory('speakers')" >SPEAKERS</li>
+                        <li ng-click="productsList.filterCategory('watches')" >WATCHES</li>
+                        <li ng-click="productsList.filterCategory('station')" >STATION</li>
+                        <li ng-click="productsList.filterCategory('phone')" >PHONE</li>
                     </ul>
                 </div>
 
                 <div class="content-search">
-                    <input type="text" ng-model="query" ng-change="search('name')" class="search-query" placeholder="Search">
+                    <input type="text" ng-model="productsList.searchText" class="search-query" placeholder="Search" />
                 </div>
             </div>
         </div>
@@ -81,12 +81,12 @@
                     <!--End-->
                     <div class="col-lg-12 col-md-12 bt12-detail-shop">
                         <div class="bt-detail-shop">
-                            <a class="title" href=""> {{product.name}}  </a>
+                            <a class="title" href=""> {{product.name}} </a>
                             <p class="shop-price"> {{product.price | currency : "$"}} </p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 bt-content-shop">
-                        <a class="btn btn-lg btn-primary" href="" ng-click="cart.addItem(product.code, product.name, product.src, product.price, 1)">
+                        <a class="btn btn-lg btn-primary" href="">
                             <i class="fa fa-shopping-cart"></i> Add to Cart
                         </a>
                     </div>
@@ -98,8 +98,31 @@
             </ul>
             <!--Pagination-->
             <div class="col-md-12 store-cart-content">
-                <div class="store-cart-footer store-down-bottom">
-                    <dir-pagination-controls on-page-change="productsList.products.pageChanged(newPageNumber)"></dir-pagination-controls>
+                <div ng-if="productsList.numberOfPages > 1" class="store-cart-footer">
+                    <div class="col-md-6">
+                        <p class="number-page">
+                            Showing {{(productsList.page - 1) * productsList.perPage + 1}} to
+                            {{productsList.page * productsList.perPage > productsList.productsCount ? productsList.productsCount : productsList.page * productsList.perPage}}
+                             of {{productsList.productsCount}} products
+                        </p>
+                    </div>
+                    <div class="col-md-6 store-down-bottom">
+                        <ul>
+                            <li>
+                                <button class="btn btn-lg btn-primary" ng-disabled="productsList.page == 1" ng-click="productsList.pageChanged(productsList.page-1)">
+                                    Previous
+                                </button>
+                            </li>
+                            <li>
+                                <p class="number-page">{{productsList.page}} / {{productsList.numberOfPages}}</p>
+                            </li>
+                            <li>
+                                <button class="btn btn-lg btn-primary" ng-disabled="productsList.page >= productsList.productsCount/productsList.perPage" ng-click="productsList.pageChanged(productsList.page+1)">
+                                    Next
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

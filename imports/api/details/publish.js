@@ -3,7 +3,7 @@
  */
 import { Meteor } from 'meteor/meteor';
 
-import { Products } from './collection';
+import { Details } from './collection';
 
 if (Meteor.isServer) {
     Meteor.publish('details', function(options) {

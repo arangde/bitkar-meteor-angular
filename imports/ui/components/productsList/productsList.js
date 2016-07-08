@@ -2,6 +2,7 @@
  * Created by jaran on 7/6/2016.
  */
 import angular from 'angular';
+import ngAnimate from 'angular-animate';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import utilsPagination from 'angular-utils-pagination';
@@ -17,32 +18,38 @@ class ProductsList {
 
         this.perPage = 9;
         this.page = 1;
-        this.sort = {
-            name: 1
-        };
         this.searchText = '';
-
-        this.filteredItems = [];
-        this.groupedItems = [];
-        this.pagedItems = [];
+        this.category = '';
 
         this.subscribe('products', () => [{
-            limit: parseInt(this.perPage),
-            skip: parseInt((this.getReactively('page') - 1) * this.perPage)
-        }, this.getReactively('searchText')
+                limit: parseInt(this.perPage),
+                skip: parseInt((this.getReactively('page') - 1) * this.perPage)
+            },
+            this.getReactively('searchText')
         ]);
 
-        // this.myFilter();
-        // this.search();
-        
         this.helpers({
             products() {
-                return Products.find({}, {
-                    sort : this.getReactively('sort')
-                });
+                const options = {};
+
+                if(this.getReactively('category') != '') {
+                    options['category'] = this.getReactively('category').toLowerCase();
+                }
+
+                if(this.getReactively('searchText') != '') {
+                    options['name'] = {
+                        $regex: `.*${this.getReactively('searchText')}.*`,
+                        $options : 'i'
+                    };
+                }
+
+                return Products.find(options);
             },
             productsCount() {
                 return Counts.get('numberOfProducts');
+            },
+            numberOfPages() {
+                return Math.ceil(Counts.get('numberOfProducts') / this.perPage);
             }
         });
     }
@@ -51,24 +58,16 @@ class ProductsList {
         this.page = newPage;
     }
 
-    myFilter(column, category) {
-
-        const options = {
-            limit: parseInt(this.perPage)
-        };
-        options[column] = category;
-
-        this.subscribe('products', () => [
-            options, this.getReactively('searchText')
-        ]);
+    filterCategory(category) {
+        this.category = category;
     }
-
 }
 
 const name = 'productsList';
 
 // create a module
 export default angular.module(name, [
+    ngAnimate,
     angularMeteor,
     uiRouter,
     utilsPagination

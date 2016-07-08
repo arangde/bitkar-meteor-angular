@@ -292,7 +292,7 @@ ul.menu-items li.menu-adwertising{display:none}
 
 
 /*Blog*/
-.about4-top-title {font-size: 30px;}
+.service-top-title {font-size: 30px;}
 
 /*Page 404*/
 .page-nofound .error-404 {font-size: 130px;}
@@ -345,7 +345,7 @@ footer .top-footer-in .col-md-3 {width: 100%;}
 }
 
 /*Page Blog*/
-.about4-top-title {
+.service-top-title {
 	font-size: 30px;
 	line-height: 28px;
 }

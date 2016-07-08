@@ -7,7 +7,6 @@ import uiRouter from 'angular-ui-router';
 
 import template from './productDetails.html';
 import { Products } from '../../../api/products';
-import { Details } from '../../../api/details';
 
 class ProductDetails {
     constructor($stateParams, $scope, $reactive) {
@@ -22,11 +21,6 @@ class ProductDetails {
         this.helpers({
             product() {
                 return Products.findOne({
-                    code: $stateParams.productCode
-                });
-            },
-            detail() {
-                return Details.findOne({
                     code: $stateParams.productCode
                 });
             }
