@@ -11,7 +11,7 @@ import template from './productsList.html';
 import { Products } from '../../../api/products';
 
 class ProductsList {
-    constructor($scope, $reactive) {
+    constructor($scope, $reactive, $filter) {
         'ngInject';
 
         $reactive(this).attach($scope);
@@ -50,6 +50,9 @@ class ProductsList {
             },
             numberOfPages() {
                 return Math.ceil(Counts.get('numberOfProducts') / this.perPage);
+            },
+            encodedUrl(name) {
+                return window.encodeURI(name);
             }
         });
     }

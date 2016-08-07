@@ -44,7 +44,7 @@ function config($stateProvider) {
     'ngInject';
 
     $stateProvider.state('productDetails', {
-        url: '/products/:productCode',
+        url: '/products/:productCode/:productName',
         template: '<product-details></product-details>'
     });
 }

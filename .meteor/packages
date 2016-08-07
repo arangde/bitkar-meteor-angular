@@ -22,3 +22,4 @@ velocity:html-reporter
 velocity:console-reporter
 tmeasday:publish-counts
 less
+peerlibrary:xml2js
